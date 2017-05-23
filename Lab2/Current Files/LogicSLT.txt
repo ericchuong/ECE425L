@@ -1,0 +1,49 @@
+`timescale 1ns / 1ps
+module LogicSLT(
+    input [2:0] OP,
+    input [15:0] A,
+    input [15:0] B,
+    output lt,
+    output eq,
+    output [15:0] OUT
+    );
+    wire [15:0]wA;
+    wire [15:0]wB;
+    
+    wire [2:0]wsOP;
+    wire [15:0]AmB;// A - B
+    wire [1:0]cin;
+    wire cout;
+    wire [2:0]n_OP;
+    wire n_eq;
+    
+    wire [15:0]AltB; //empty wires
+    
+    
+    //check
+    CheckOP COPslt (OP[2], OP[1], A, B, wA, wB);
+    
+    //Subtract B from A
+    and A1slt (cin[0], OP[2],OP[1],OP[0]);
+    not N1slt (cin[1], cin[0]); //let cin[1] be 0 if OP is 111
+    LogicADDSUB SUBslt(wsOP,A,B,cin[1],cout,AmB);
+    
+    //
+    //if A=B, then AmB = 0000 0000 0000 0000, with cout = 0
+    //thus the value of (AmB[0] or ... or AmB[15] or cout or n_OP[2] or...or n_OP[0]) should be 0
+    not N2slt (n_OP,OP);
+    or OR1slt(n_eq, AmB[0], AmB[1], AmB[2], AmB[3], AmB[4], AmB[5], AmB[6], AmB[7], AmB[8],
+     AmB[9], AmB[10], AmB[11], AmB[12], AmB[13], AmB[14], AmB[15], n_OP[0], n_OP[1], n_OP[2]);
+    //if the value of n_eq is 0, then A = B and eq = 1
+    not N3slt (eq, n_eq);
+    
+    //if cout = 0, then A = B or A < B
+    //if eq = 0, then A > B or A < B
+    //thus, if cout = eq = 0, then A < B and lt = 1
+    nor NOR1slt (lt, cout, eq);
+    
+    //choose: if lt = 0, output 0000 0000 0000 0000
+    //        else lt = 1, output 0000 0000 0000 0001
+    MUX2_1 MUXoa(lt,AltB,{AltB[14:0], lt},OUT);
+    
+endmodule

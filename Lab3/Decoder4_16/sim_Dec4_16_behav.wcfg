@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_Dec4_16_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="sim_Dec4_16" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="4000fs"></ZoomStartTime>
+      <ZoomEndTime time="6964001fs"></ZoomEndTime>
+      <Cursor1Time time="6434000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="2" />
+   <wvobject db_ref_id="1" fp_name="/sim_Dec4_16/in" type="array">
+      <obj_property name="ElementShortName">in[3:0]</obj_property>
+      <obj_property name="ObjectShortName">in[3:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_Dec4_16/out" type="array">
+      <obj_property name="ElementShortName">out[15:0]</obj_property>
+      <obj_property name="ObjectShortName">out[15:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+</wave_config>

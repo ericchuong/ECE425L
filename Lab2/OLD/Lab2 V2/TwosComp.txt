@@ -1,0 +1,46 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 04/16/2016 07:31:11 PM
+// Design Name: 
+// Module Name: TwosComp
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module TwosComp(
+    input CheckOP,
+    input [2:0]OP,
+    input [15:0]IN,
+    output [15:0]OUT
+    );
+    
+    wire valid;
+    wire n_valid;
+    wire original_in;
+    
+    //Check if operation is valid based on input
+    and AND1tc (valid, CheckOP, OP[0]);
+    not NOT1tc(n_valid, valid);
+    
+    //if this is meant to negative, return original valid
+    and (original_in, n_valid, IN);
+    
+    //2's compliment if OP[0] and valid are 1
+    //COMPLEMENT HERE
+    
+    //output
+    //or ORtc (OUT, ??, original_in);
+endmodule

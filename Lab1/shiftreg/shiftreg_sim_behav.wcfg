@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="shiftreg_sim_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="shiftreg_sim" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="13920001fs"></ZoomEndTime>
+      <Cursor1Time time="1420000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="7" />
+   <wvobject db_ref_id="1" fp_name="/shiftreg_sim/sel0" type="logic">
+      <obj_property name="ElementShortName">sel0</obj_property>
+      <obj_property name="ObjectShortName">sel0</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/shiftreg_sim/sel1" type="logic">
+      <obj_property name="ElementShortName">sel1</obj_property>
+      <obj_property name="ObjectShortName">sel1</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/shiftreg_sim/load" type="array">
+      <obj_property name="ElementShortName">load[3:0]</obj_property>
+      <obj_property name="ObjectShortName">load[3:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/shiftreg_sim/shiftinput" type="logic">
+      <obj_property name="ElementShortName">shiftinput</obj_property>
+      <obj_property name="ObjectShortName">shiftinput</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/shiftreg_sim/en" type="logic">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/shiftreg_sim/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/shiftreg_sim/out" type="array">
+      <obj_property name="ElementShortName">out[3:0]</obj_property>
+      <obj_property name="ObjectShortName">out[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+</wave_config>

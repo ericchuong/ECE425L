@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_reg_file_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="sim_reg_file" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="999994200fs"></ZoomStartTime>
+      <ZoomEndTime time="1000001161fs"></ZoomEndTime>
+      <Cursor1Time time="1000000000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="9" />
+   <wvobject db_ref_id="1" fp_name="/sim_reg_file/Aaddr" type="array">
+      <obj_property name="ElementShortName">Aaddr[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Aaddr[3:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_reg_file/Baddr" type="array">
+      <obj_property name="ElementShortName">Baddr[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Baddr[3:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_reg_file/Caddr" type="array">
+      <obj_property name="ElementShortName">Caddr[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Caddr[3:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_reg_file/Load" type="logic">
+      <obj_property name="ElementShortName">Load</obj_property>
+      <obj_property name="ObjectShortName">Load</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_reg_file/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_reg_file/Clear" type="logic">
+      <obj_property name="ElementShortName">Clear</obj_property>
+      <obj_property name="ObjectShortName">Clear</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_reg_file/C" type="array">
+      <obj_property name="ElementShortName">C[15:0]</obj_property>
+      <obj_property name="ObjectShortName">C[15:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_reg_file/A" type="array">
+      <obj_property name="ElementShortName">A[15:0]</obj_property>
+      <obj_property name="ObjectShortName">A[15:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_reg_file/B" type="array">
+      <obj_property name="ElementShortName">B[15:0]</obj_property>
+      <obj_property name="ObjectShortName">B[15:0]</obj_property>
+   </wvobject>
+</wave_config>

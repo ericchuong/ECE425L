@@ -1,0 +1,58 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 04/13/2016 05:01:08 PM
+// Design Name: 
+// Module Name: aluV1
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module aluV1(opcod, X, Y, Cin, out, Cout, lt,eq, V);
+        /*
+        0: OR
+        1: AND
+        2: ADD
+        3: SUB
+        7: SLT (Select it Less Than)
+        */
+    input [2:0]opcod;   //is the operation selector [2:0]
+    //X, Y: are two input words
+    input [15:0]X;
+    input [15:0]Y;
+    input Cin;          //is the carry in bit,
+    output [15:0]out;   //is the output word result,
+    output Cout;        //is the carryout bit.
+    //lt, eq: are comparison indicator bits(for less than and equal to)
+    output lt;           //less than
+    output eq;           //equal to
+    output V;           //is the overflow indicator
+    
+    wire [15:0]oaOUT;
+    wire [15:0] asOUT;
+    wire [15:0] sltOUT;
+    
+    //Logic OR/AND
+    LogicORAND oa(opcod,X,Y,oaOUT);
+    //ADD/SUB
+    LogicADDSUB as(opcod,X,Y,Cin,Cout,asOUT);
+    //SLT
+    LogicSLT slt(opcod,X,Y,lt,eq,sltOUT);
+    
+    //All other outputs should be zero except for the specified operation
+    or orALU (out, oaOUT, asOUT, sltOUT);
+    
+
+endmodule

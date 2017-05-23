@@ -1,0 +1,50 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 04/13/2016 05:01:08 PM
+// Design Name: 
+// Module Name: aluV1
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module aluV1(opcod, X, Y, Cin, out, Cout, lt,eq, V);
+/*
+X, Y: are two input words
+out : is the output word result,
+cin : is the carry in bit,
+cout : is the carryout bit.
+lt, eq: are comparison indicator bits(for less than and equal to)
+V: is the overflow indicator
+Opcod: is the operation selector [2:0]
+*/
+input opcod;
+input [15:0]X;
+input [15:0]Y;
+input Cin;
+output out;
+output Cout;
+inout lt;
+inout eq;
+output V;
+
+//Decoder3_8(en, in, out); //[2:0]in [7:0]out
+
+//full adder
+//FA(x, y, Cin, s, Cout)
+//2's compliment
+//Adder_2comp(Cin, a, b, s, Cout) //[15:0]a [15:0]b [15:0]s 
+
+endmodule

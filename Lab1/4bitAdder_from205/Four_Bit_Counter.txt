@@ -1,0 +1,13 @@
+`timescale 1ns / 1ps
+module Four_Bit_Counter(clk, Q,tick);
+		input clk,tick;
+		output reg [3:0]Q;
+		wire[3:0]Qnext;
+		
+	assign Qnext=Q+1;
+	always @(posedge clk)
+	begin
+		if (tick==1)Q<=Qnext;
+		else			Q<=Q;
+	end		
+endmodule

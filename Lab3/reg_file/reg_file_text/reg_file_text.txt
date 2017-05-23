@@ -1,0 +1,64 @@
+
+module reg_file(
+    input [3:0]Aaddr,
+    input [3:0]Baddr,
+    input [3:0]Caddr,
+    input Load,
+    input Clear,
+    input clk,
+    input [15:0]C,
+    output [15:0]A,
+    output [15:0]B
+    );
+    reg [15:0]regis0=0;
+    reg [15:0]regis1=1;
+    reg [15:0]regis2=2;
+    reg [15:0]regis3=3;
+    reg [15:0]regis4=4;
+    reg [15:0]regis5=5;
+    reg [15:0]regis6=6;
+    reg [15:0]regis7=7;
+    reg [15:0]regis8=8;
+    reg [15:0]regis9=9;
+    reg [15:0]regis10=10;
+    reg [15:0]regis11=11;
+    reg [15:0]regis12=12;
+    reg [15:0]regis13=13;
+    reg [15:0]regis14=14;
+    reg [15:0]regis15=15;
+    wire [15:0]tempB;
+    wire [15:0]tempC;
+    wire [15:0]selA;
+    wire [15:0]selB;
+    wire [15:0]selC;
+    wire [15:0]hold;
+    
+    Decoder4_16 C_Dec(Caddr[3:0], tempC[15:0]);
+    and A1[15:0](selC, tempC, Load);
+    
+    MUX_16bit CM0[15:0](selC[0], regis0, C, regis0);
+    MUX_16bit CM1[15:0](selC[1], regis1, C, regis1);
+    MUX_16bit CM2[15:0](selC[2], regis2, C, regis2);
+    MUX_16bit CM3[15:0](selC[3], regis3, C, regis3);
+    MUX_16bit CM4[15:0](selC[4], regis4, C, regis4);
+    MUX_16bit CM5[15:0](selC[5], regis5, C, regis5);
+    MUX_16bit CM6[15:0](selC[6], regis6, C, regis6);
+    MUX_16bit CM7[15:0](selC[7], regis7, C, regis7);
+    MUX_16bit CM8[15:0](selC[8], regis8, C, regis8);
+    MUX_16bit CM9[15:0](selC[9], regis9, C, regis9);
+    MUX_16bit CM10[15:0](selC[10], regis10, C, regis10);
+    MUX_16bit CM11[15:0](selC[11], regis11, C, regis11);
+    MUX_16bit CM12[15:0](selC[12], regis12, C, regis12);
+    MUX_16bit CM13[15:0](selC[13], regis13, C, regis13);
+    MUX_16bit CM14[15:0](selC[14], regis14, C, regis14);
+    MUX_16bit CM15[15:0](selC[15], regis15, C, regis15);                        //if Load is 1, 16bit C is put into 4bit Caddress
+    
+    MUX16x16_1 A_MUX(Aaddr[3:0], regis0[15:0], regis1[15:0], regis2[15:0], regis3[15:0], regis4[15:0], regis5[15:0], regis6[15:0], 
+        regis7[15:0], regis8[15:0], regis9[15:0], regis10[15:0], regis11[15:0], regis12[15:0], regis13[15:0], regis14[15:0], regis15[15:0], A[15:0]);
+                                                                                //output what is in Aaddr to A
+                                                                        
+    MUX16x16_1 B_MUX(Baddr[3:0], regis0[15:0], regis1[15:0], regis2[15:0], regis3[15:0], regis4[15:0], regis5[15:0], regis6[15:0], 
+        regis7[15:0], regis8[15:0], regis9[15:0], regis10[15:0], regis11[15:0], regis12[15:0], regis13[15:0], regis14[15:0], regis15[15:0], B[15:0]);
+                                                                                //output what is in Baddr to B
+endmodule
+

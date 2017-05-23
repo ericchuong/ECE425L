@@ -1,0 +1,60 @@
+`timescale 1ns / 1ps
+
+module BinarySevenSeg(A,B,C,D,f);
+	input A,B,C,D;
+	output [0:6]f;
+	
+	//a
+	wire [3:0]wa;
+	and and0(wa[0],~A,~B,~C,D);
+	and and1(wa[1],~A,B,~C,~D);
+	and and2(wa[2],A,B,~C,D);
+	and and3(wa[3],A,~B,C,D);
+	or(f[0],wa[0],wa[1],wa[2],wa[3]);
+	
+	//b
+	wire [3:0]wb;
+	and and4(wb[0],A,C,D);
+	and and5(wb[1],B,C,~D);
+	and and6(wb[2],A,B,~D);
+	and and7(wb[3],~A,B,~C,D);
+	or(f[1],wb[0],wb[1],wb[2],wb[3]);
+	
+	//c
+	wire [2:0]wc;
+	and and8(wc[0],A,~B,C,~D);
+	and and9(wc[1],A,B,~D);
+	and and310(wc[2],A,B,C);
+	or(f[2],wc[0],wc[1],wc[2]);
+	
+	//d
+	wire [2:0]wd; ///go
+	and and11(wd[0],~A,B,~C,~D);
+	and and12(wd[1],~A,~B,~C,D);
+	and and13(wd[2],B,C,D);
+	or(f[3],wd[0],wd[1],wd[2]);
+	
+	//e
+	wire [2:0]we;
+	and and14(we[0],~A,B,~C,D);
+	and and15(we[1],~A,D);
+	and and16(we[2],~B,~C,D);
+	or(f[4],we[0],we[1],we[2]);
+	
+	//f
+	wire [3:0]wf;
+	and and17(wf[0],~A,B,~C,~D);
+	and and18(wf[1],A,B,~C,D);
+	and and19(wf[2],~A,C,D);
+	and and20(wf[3],~A,~B,C);
+	or(f[5],wf[0],wf[1],wf[2],wf[3]);
+	
+	//g
+	wire [2:0]wg;
+	and and21(wg[0],~A,~B,~C);
+	and and22(wg[1],A,B,~C,~D);
+	and and23(wg[2],~A,B,C,D);
+	or(f[6],wg[0],wg[1],wg[2]);
+	
+
+endmodule

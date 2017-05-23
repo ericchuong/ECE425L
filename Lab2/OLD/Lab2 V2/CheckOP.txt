@@ -1,0 +1,41 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 04/16/2016 06:16:49 PM
+// Design Name: 
+// Module Name: CheckOP
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module CheckOP(
+    input OP0,
+    input OP1,
+    input [15:0] A,
+    input [15:0] B,
+    output [15:0] OUTA,
+    output [15:0] OUTB
+    );
+    wire wOP;
+
+    and AND1oa (wOP, OP0, OP1);
+    
+    //if the above is true, the values of A and B will pass on
+    //otherwise, the values will be set to 0
+    and
+        AND2oa (OUTA, A, wOP),
+        AND3oa (OUTB, B, wOP);
+         
+endmodule

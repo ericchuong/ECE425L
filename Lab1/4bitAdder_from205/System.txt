@@ -1,0 +1,23 @@
+`timescale 1ns / 1ps
+
+module System(clk,dataout,control,sevenseg);
+	input clk;
+	//input [3:0]sw;
+	output[3:0]dataout;
+	output[2:0]control;
+	output[0:6]sevenseg;
+	wire tick;
+	wire [3:0]Q;
+	wire [0:6]invert7seg;
+	
+	LCDM display(clk,{1'b0,Q,35'hFFFFFFFFF},dataout,control);
+	
+	BinarySevenSeg B27(Q[3],Q[2],Q[1],Q[0],invert7seg);
+	
+	assign sevenseg=~invert7seg;
+	
+	tick tick0(clk,tick);
+	
+	Four_Bit_Counter Bob(clk,Q,tick);
+
+endmodule

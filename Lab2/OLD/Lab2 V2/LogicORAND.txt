@@ -1,0 +1,48 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 04/16/2016 05:43:25 PM
+// Design Name: 
+// Module Name: LogicORAND
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module LogicORAND(
+    input [2:0] OP,
+    input [15:0] A,
+    input [15:0] B,
+    output [15:0] OUT
+    );
+    wire [15:0]wA;
+    wire [15:0]wB;
+    wire [2:0] wOP;
+    wire [15:0]wOR;
+    wire [15:0]wAND;
+    
+    //Check if the opperator is 000 or 001 for logic OR or AND
+    not
+        N1oa(wOP[1], OP[2]),
+        N2oa(wOP[0], OP[1]);
+    CheckOP COPoa (wOP[2], wOP[1], A, B, wA, wB);
+        
+    //Logic Or and AND
+    or OR1oa (wOR, wA, wB);
+    and AND4oa (wAND, wA, wB);
+    
+    //2_1 mux--> if OP[0]==0, choose OR; if OP[0]==1
+    MUX2_1 MUXoa(OP[0],wOR,wAND,OUT);
+        
+endmodule

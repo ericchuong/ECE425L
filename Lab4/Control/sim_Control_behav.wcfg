@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_Control_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="sim_Control" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="11580001fs"></ZoomEndTime>
+      <Cursor1Time time="9670000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="11" />
+   <wvobject db_ref_id="1" fp_name="/sim_Control/opcod" type="array">
+      <obj_property name="ElementShortName">opcod[3:0]</obj_property>
+      <obj_property name="ObjectShortName">opcod[3:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_Control/RegDest" type="logic">
+      <obj_property name="ElementShortName">RegDest</obj_property>
+      <obj_property name="ObjectShortName">RegDest</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_Control/ALUSrc" type="logic">
+      <obj_property name="ElementShortName">ALUSrc</obj_property>
+      <obj_property name="ObjectShortName">ALUSrc</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_Control/MemToReg" type="logic">
+      <obj_property name="ElementShortName">MemToReg</obj_property>
+      <obj_property name="ObjectShortName">MemToReg</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_Control/RegWrite" type="logic">
+      <obj_property name="ElementShortName">RegWrite</obj_property>
+      <obj_property name="ObjectShortName">RegWrite</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_Control/MemRead" type="logic">
+      <obj_property name="ElementShortName">MemRead</obj_property>
+      <obj_property name="ObjectShortName">MemRead</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_Control/MemWrite" type="logic">
+      <obj_property name="ElementShortName">MemWrite</obj_property>
+      <obj_property name="ObjectShortName">MemWrite</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_Control/Branch" type="logic">
+      <obj_property name="ElementShortName">Branch</obj_property>
+      <obj_property name="ObjectShortName">Branch</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_Control/ALUop1" type="logic">
+      <obj_property name="ElementShortName">ALUop1</obj_property>
+      <obj_property name="ObjectShortName">ALUop1</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_Control/ALUop0" type="logic">
+      <obj_property name="ElementShortName">ALUop0</obj_property>
+      <obj_property name="ObjectShortName">ALUop0</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_Control/Jump" type="logic">
+      <obj_property name="ElementShortName">Jump</obj_property>
+      <obj_property name="ObjectShortName">Jump</obj_property>
+   </wvobject>
+</wave_config>

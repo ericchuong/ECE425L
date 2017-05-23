@@ -1,0 +1,27 @@
+#pins.ucf
+
+#clock
+NET "clk" LOC = "C9"  | IOSTANDARD = LVCMOS33 ;
+
+#Switches
+#NET "SW[0]" LOC = "L13" | IOSTANDARD = LVTTL | PULLUP ;
+#NET "SW[1]" LOC = "L14" | IOSTANDARD = LVTTL | PULLUP ;
+#NET "SW[2]" LOC = "H18" | IOSTANDARD = LVTTL | PULLUP ;
+#NET "SW[3]" LOC = "N17" | IOSTANDARD = LVTTL | PULLUP ;
+
+NET "control[0]" LOC = "L17" | IOSTANDARD = LVCMOS33 ;
+NET "control[1]" LOC = "L18" | IOSTANDARD = LVCMOS33 ;
+NET "control[2]" LOC = "M18" | IOSTANDARD = LVCMOS33 ;
+NET "dataout[0]" LOC = "R15" | IOSTANDARD = LVCMOS33 ;
+NET "dataout[1]" LOC = "R16" | IOSTANDARD = LVCMOS33 ;
+NET "dataout[2]" LOC = "P17" | IOSTANDARD = LVCMOS33 ; 
+NET "dataout[3]" LOC = "M15" | IOSTANDARD = LVCMOS33 ;
+
+NET "sevenseg[0]" LOC = "B4" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 6;
+NET "sevenseg[1]" LOC = "A4" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 6;
+NET "sevenseg[2]" LOC = "D5" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 6;
+NET "sevenseg[3]" LOC = "C5" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 6;
+NET "sevenseg[4]" LOC = "A6" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 6;
+NET "sevenseg[5]" LOC = "B6" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 6;
+NET "sevenseg[6]" LOC = "E7" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 6;
+

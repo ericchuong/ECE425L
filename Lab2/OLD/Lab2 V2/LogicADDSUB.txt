@@ -1,0 +1,28 @@
+`timescale 1ns / 1ps
+module LogicADDSUB(
+    input [2:0] OP,
+    input [15:0] A,
+    input [15:0] B,
+    input cin,
+    output cout,
+    output [15:0] OUT
+    );
+    
+    wire wOP;
+    wire check;
+    wire [15:0]twoB_or_notTwoB;
+    
+    //Check if the opperator is 010 or 011 for ADD or SUB
+    not N1as(wOP, OP[2]);
+    CheckOP COPas (wOP, OP[1], A, B, wA, wB);
+    
+    //If OP[0] is 0, ADD; if OP[0] is 1, SUB
+    
+    //2's complement if 
+    and ANDas (check, wOP, OP[1]);
+    TwosComp TCas(check,OP,B,twoB_or_notTwoB);
+    
+    //Add
+    Adder_2comp ADDSUBas(cin,A,twoB_or_notTwoB,OUT, cout);
+    
+endmodule

@@ -1,0 +1,12 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  "../../../../MUX4_to_1/MUX4_to_1.srcs/sources_1/new/MUX2_to_1.v"
+verilog xil_defaultlib  "../../../../DFF/DFF.srcs/sources_1/new/DFF.v"
+verilog xil_defaultlib  "../../../../MUX4_to_1/MUX4_to_1.srcs/sources_1/new/MUX4_to_1.v"
+verilog xil_defaultlib  "../../../shiftreg.srcs/sources_1/new/shiftreg.v"
+verilog xil_defaultlib  "../../../shiftreg.srcs/sim_1/new/shiftreg_sim.v"
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

@@ -1,0 +1,126 @@
+`timescale 1ns / 1ps
+/*
+	LCD Control Moducle for Spartan3E Started Board Developed by Steven McNinch
+	00000 = '0'		01000 = '8'		10000 = '.'		11000 = '<'
+	00001 = '1'		01001 = '9'		10001 = ':'		11001 = '>'
+	00010 = '2'		01010 = 'A'		10010 = '+'		11010 = 'm'
+	00011 = '3'		01011 = 'B'		10011 = '-'		11011 = 's'
+	00100 = '4'		01100 = 'C'		10100 = '*'		11100 = 'micro'
+	00101 = '5'		01101 = 'D'		10101 = '/'		11101 = 'ohm'
+	00110 = '6'		01110 = 'E'		10110 = '('		11110 = '='
+	00111 = '7'		01111 = 'F'		10111 = ')'		11111 = 'space	
+*/
+module LCDM(clk,datain,dataout,control);
+	input clk;
+	input [39:0] datain;
+	output reg [3:0]dataout = 4'hC;
+	output reg [2:0]control = 3'hF; // {E,RS,RW}
+	reg [19:0] delay = 0;
+	reg [1:0] primary_state = 0;
+	reg [3:0] secondary_state = 0;
+	reg [3:0] sel = 0;
+	reg [7:0] char=0;
+	reg [4:0] mux=0;
+	wire [7:0] IR;
+	localparam func_set = 8'h28;//,8'h06,8'h0C,8'h01};
+	localparam EM_set = 8'h06;
+	localparam disp_set = 8'h0C;
+	localparam clr_scrn = 8'h01;
+	localparam addr_zero = 8'h80;
+	assign IR = sel==0?func_set:
+					sel==1?EM_set:
+					sel==2?disp_set:
+					sel==3?clr_scrn:
+					sel==4?addr_zero:
+					8'h00;
+	
+	always @(sel or datain)
+	case(sel)
+	0:mux = datain[39:35];
+	1:mux = datain[34:30];
+	2:mux = datain[29:25];
+	3:mux = datain[24:20];
+	4:mux = datain[19:15];
+	5:mux = datain[14:10];
+	6:mux = datain[9:5];
+	7:mux = datain[4:0];
+	default: mux = 31;
+	 endcase
+	 
+	 always @(mux)
+	 case(mux)
+	 0:char = 8'h30;
+	 1:char = 8'h31;
+	 2:char = 8'h32;
+	 3:char = 8'h33;
+	 4:char = 8'h34;
+	 5:char = 8'h35;
+	 6:char = 8'h36;
+	 7:char = 8'h37;
+	 8:char = 8'h38;
+	 9:char = 8'h39;
+	 10:char = 8'h41;//A
+	 11:char = 8'h42;//B
+	 12:char = 8'h43;//C
+	 13:char = 8'h44;//D
+	 14:char = 8'h45;//E
+	 15:char = 8'h46;//F
+	 16:char = 8'h2E;//.
+	 17:char = 8'h3A;//:
+	 18:char = 8'h2B;//+
+	 19:char = 8'h2D;//-
+	 20:char = 8'h2A;//*
+	 21:char = 8'h2F;///
+	 22:char = 8'h28;//(
+	 23:char = 8'h29;//)
+	 24:char = 8'h3C;//<
+	 25:char = 8'h3E;//>
+	 26:char = 8'h6D;//m
+	 27:char = 8'h53;//S
+	 28:char = 8'hE4;//micro
+	 29:char = 8'hF4;//ohm
+	 30:char = 8'h3D;//=
+	 31:char = 8'hFE;//blank 
+	 endcase
+	always @ (posedge clk)
+	case(primary_state)
+	0	:	case(secondary_state)
+			0	:	begin if(delay==0) begin secondary_state<=1;	delay<= 750_000; control<=0; end else delay<=delay-1; end
+			1	:	begin if(delay==0) begin secondary_state<=2;	delay<=12; 		dataout<=4'h3;	control<=3'b100;	end else delay<=delay-1; end
+			2	:	begin if(delay==0) begin secondary_state<=3;	delay<=205_000;					control<=3'b000;	end else delay<=delay-1; end
+			3	:	begin if(delay==0) begin secondary_state<=4;	delay<=12;		dataout<=4'h3;	control<=3'b100;	end else delay<=delay-1; end
+			4	:	begin if(delay==0) begin secondary_state<=5;	delay<=5_000;						control<=3'b000;	end else delay<=delay-1; end
+			5	:	begin if(delay==0) begin secondary_state<=6;	delay<=12;		dataout<=4'h3;	control<=3'b100;	end else delay<=delay-1; end
+			6	:	begin if(delay==0) begin secondary_state<=7;	delay<=2_000;						control<=3'b000;	end else delay<=delay-1; end
+			7	:	begin if(delay==0) begin secondary_state<=8;	delay<=12;		dataout<=4'h2;	control<=3'b100;	end else delay<=delay-1; end
+			8	:	begin if(delay==0) begin primary_state<= 1;	secondary_state<=0;	delay<=2_000;	sel<=0;			control<=3'b000;	end else delay<=delay-1; end
+			default: secondary_state<= 0;
+			endcase
+	1	:	case(secondary_state)
+			0	:	begin if(delay==0) begin secondary_state<=1; delay<=2;	dataout<=IR[7:4]; control<=3'b000;	end else delay<=delay-1; end
+			1	:	begin if(delay==0) begin secondary_state<=2;	delay<=12;							control<=3'b100;	end else delay<=delay-1; end
+			2	:	begin if(delay==0) begin secondary_state<=3; delay<=2;							control<=3'b000;	end else delay<=delay-1; end
+			3	:	begin if(delay==0) begin secondary_state<=4; delay<=50;							control<=3'b000;	end else delay<=delay-1; end
+			4	:	begin if(delay==0) begin secondary_state<=5;																	end else delay<=delay-1; end
+			5	:	begin if(delay==0) begin secondary_state<=6; delay<=2;	dataout<=IR[3:0]; control<=3'b000;	end else delay<=delay-1; end
+			6	:	begin if(delay==0) begin secondary_state<=7;	delay<=12;							control<=3'b100;	end else delay<=delay-1; end
+			7	:	begin if(delay==0) begin secondary_state<=8; delay<=2;							control<=3'b000;	end else delay<=delay-1; end
+			8	:	begin if(delay==0) begin if(sel==4)	begin primary_state<=2; secondary_state<=0;sel<=0;end else begin secondary_state<=0;sel<=sel+1;end delay<=2_000;control<=3'b000;end else delay<=delay-1; end
+			default: secondary_state<= 0;
+			endcase
+	2	:	case(secondary_state)
+			0	:	begin if(delay==0) begin secondary_state<=1; delay<=2;	dataout<=char[7:4]; control<=3'b010;	end else delay<=delay-1; end
+			1	:	begin if(delay==0) begin secondary_state<=2;	delay<=12;							control<=3'b110;	end else delay<=delay-1; end
+			2	:	begin if(delay==0) begin secondary_state<=3; delay<=2;							control<=3'b010;	end else delay<=delay-1; end
+			3	:	begin if(delay==0) begin secondary_state<=4; delay<=50;							control<=3'b000;	end else delay<=delay-1; end
+			4	:	begin if(delay==0) begin secondary_state<=5;																	end else delay<=delay-1; end
+			5	:	begin if(delay==0) begin secondary_state<=6; delay<=2;	dataout<=char[3:0]; control<=3'b010;	end else delay<=delay-1; end
+			6	:	begin if(delay==0) begin secondary_state<=7;	delay<=12;							control<=3'b110;	end else delay<=delay-1; end
+			7	:	begin if(delay==0) begin secondary_state<=8; delay<=2;							control<=3'b010;	end else delay<=delay-1; end
+			8	:	begin if(delay==0) begin if(sel==15)	begin primary_state<=1; secondary_state<=0;sel<=4;end else begin secondary_state<=0;sel<=sel+1;end delay<=2_000;control<=3'b000;end else delay<=delay-1; end
+			default: secondary_state<= 0;
+			endcase
+
+	default	: primary_state<=0;
+	endcase
+endmodule

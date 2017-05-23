@@ -1,0 +1,237 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    18:10:58 04/11/2016 
+// Design Name: 
+// Module Name:    ShiftRegisterSourceFileV2p1 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module ShiftRegisterSourceFileV2p1(CE, mode, SLI, SRI, clk, sw, dataout);
+	input CE; //ENABLE;
+	input mode; //left or right shift
+	input SLI;	//SHIFT LEFT INPUT
+	input SRI;	//SHIFT RIGHT INPUT
+	input clk;  //CLOCK
+	input [3:0]sw; 	//input the swithches (4-bits)	
+	output [3:0]dataout; //Output
+
+	wire [3:0]temp;
+	
+	//LOAD
+	//loads information
+	//LCDI LOAD(clk, DIN,W,WADD, dataout, control);
+	//LCDI(clk, DIN,W,WADD, dataout, control);
+	//LCD_controller LCD(clk,PC,R0,R1,R2,R3,W,WADD,CHAR);
+	//LCD_controller(clk,PC,R0,R1,R2,R3,W,WADD,CHAR);
+
+	//HOLD
+	//holds until enable is TRUE
+	//if (CE)
+	//ANDANDXOR(clk, CE, A1, A2, B1, B2, Q);
+	begin
+		ANDANDXOR aax1(clk, CE, SRI, mode, ~mode, sw[1], temp[0]);
+		D_Flip_Flop DFF1 (clk,CE,temp[0],dataout[0]);
+		
+		ANDANDXOR aax2(clk, CE, sw[0], mode, ~mode, sw[2], temp[1]);
+		D_Flip_Flop DFF2 (clk,CE,temp[1],dataout[1]);
+		
+		ANDANDXOR aax3(clk, CE, sw[1], mode, ~mode, sw[3], temp[2]);
+		D_Flip_Flop DFF3 (clk,CE,temp[2],dataout[2]);
+		
+		ANDANDXOR aax4(clk, CE, sw[2], mode, ~mode, SLI, temp[3]);
+		D_Flip_Flop DFF4 (clk,CE,temp[3],dataout[3]);
+
+	end
+endmodule
+------------------------------------------------------------------------------------------
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    18:11:38 04/11/2016 
+// Design Name: 
+// Module Name:    ANDANDXOR 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module ANDANDXOR(clk, CE, A1, A2, B1, B2, Dtemp);
+	 input clk; //clock
+	 input CE;	//enable
+	 input A1;
+	 input A2;
+	 input B1;
+	 input B2;
+	 //output Q; //output
+	 output Dtemp; //output
+	 
+	 wire [0:1]temp;
+	 //wire Dtemp;
+	 
+	 and
+		andA(temp[0],A1,A2),		//AND A
+		andB(temp[1],B1,B2);	//AND B
+	 
+	 //XOR A B
+	 xor xorAB(Dtemp,temp[0],temp[1]);
+	 
+	//D_Flip_Flop DFF(clk,CE,Dtemp,Q);
+
+endmodule
+
+------------------------------------------------------------------------------------------
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    18:12:23 04/11/2016 
+// Design Name: 
+// Module Name:    D_Flip_Flop 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module D_Flip_Flop(CLK,CE,D,Q);
+	input CLK;
+	input CE;
+	input D;
+	output reg Q = 0;
+	always @(posedge CLK)
+	if (CE) Q <= D;
+endmodule
+------------------------------------------------------------------------------------------
+`timescale 1ns / 1ps
+
+////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer:
+//
+// Create Date:   18:17:47 04/11/2016
+// Design Name:   ShiftRegisterSourceFileV2p1
+// Module Name:   C:/Users/Photoshop_Elements/Desktop/ECE 425L McNinch/Labs/Lab1/ShiftRegisteV2/BenchTest_SRV2t1.v
+// Project Name:  ShiftRegisteV2
+// Target Device:  
+// Tool versions:  
+// Description: 
+//
+// Verilog Test Fixture created by ISE for module: ShiftRegisterSourceFileV2p1
+//
+// Dependencies:
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+////////////////////////////////////////////////////////////////////////////////
+
+module BenchTest_SRV2t1;
+
+	// Inputs
+	reg CE;
+	reg mode;
+	reg SLI;
+	reg SRI;
+	reg clk;
+	reg [3:0] sw;
+
+	// Outputs
+	wire [3:0] dataout;
+
+	// Instantiate the Unit Under Test (UUT)
+	ShiftRegisterSourceFileV2p1 uut (
+		.CE(CE), 
+		.mode(mode), 
+		.SLI(SLI), 
+		.SRI(SRI), 
+		.clk(clk), 
+		.sw(sw), 
+		.dataout(dataout)
+	);
+
+	initial begin
+		// Initialize Inputs
+		CE = 0;
+		mode = 0;
+		SLI = 0;
+		SRI = 0;
+		clk = 0;
+		sw = 0;
+
+		// Wait 100 ns for global reset to finish
+		#100;
+        
+		// Add stimulus here
+
+	end
+      
+endmodule
+/*	initial begin
+		// Initialize Inputs
+		clk = 0;
+		repeat(1000)
+		#1 clk = ~clk;
+	end
+	
+	initial begin
+		// Initialize Inputs
+		CE = 0;
+		mode = 0;
+		SLI = 0;
+		SRI = 0;
+		sw = 0;
+
+		// Wait 100 ns for global reset to finish
+		#100; //the delay
+		
+      CE = 1;//begin
+		#10;
+		sw = 7;
+		mode = 1;
+		
+		#20;
+		SRI = 1;
+		
+		#20
+		SRI = 0;
+		
+		#20;
+		mode = 0;
+		SLI = 1;
+		
+		#20;
+		SLI = 0;
+
+	end
+      
+endmodule*/
+

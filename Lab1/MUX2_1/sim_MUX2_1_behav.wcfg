@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_MUX2_1_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="sim_MUX2_1" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="13920001fs"></ZoomEndTime>
+      <Cursor1Time time="13540000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="3" />
+   <wvobject db_ref_id="1" fp_name="/sim_MUX2_1/sel" type="logic">
+      <obj_property name="ElementShortName">sel</obj_property>
+      <obj_property name="ObjectShortName">sel</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_MUX2_1/in" type="array">
+      <obj_property name="ElementShortName">in[1:0]</obj_property>
+      <obj_property name="ObjectShortName">in[1:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/sim_MUX2_1/out" type="logic">
+      <obj_property name="ElementShortName">out</obj_property>
+      <obj_property name="ObjectShortName">out</obj_property>
+   </wvobject>
+</wave_config>
